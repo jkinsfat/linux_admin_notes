@@ -1,11 +1,12 @@
-# SSH Login
+# SSH
+## SSH Login.
 
 `ssh user@<ip_address>`
 
-#Running Remote Command
+## Running Remote Command
 `ssh user@<ip_address> {'|"}YOUR_REMOTE_COMMAND{'|"}`
 
-#Configuring Password-less Login
+## Configuring Password-less Login
 
 1. Check for existing SSH key pair (Would be sad to overwrite :( )
 
@@ -19,7 +20,7 @@
 	- Enter a secure passphrase (or none if you wish to automate use)
 
 3. Copy the Public Key to Server
-	- Cpy using ssh-copy-id.
+	- Copy using ssh-copy-id.
 
 		`ssh-copy-id user@<ip_address>`
 
@@ -29,27 +30,30 @@
  	- Manually Copy 
 		`cat ~/.ssh/id_<key_name>.pub | ssh user@<ip_address> "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys`
 
-#Disable SSH Password Authentication
+4. Logging In
 
-	1. Login as user with sudo privileges or as root.
+	`ssh user@<ip_address> -i /path/to/mykey`
 
-		`ssh sudo_user@<ip_address>` 
+## Disable SSH Password Authentication.
+1. Login as user with sudo privileges or as root.
 
-	2. Open SSH config file, /etc/ssh/sshd_config, and modify the following directives
+>`ssh sudo_user@<ip_address>` 
 
-		```
-		PasswordAuthentication no
-		ChallengeResponseAuthentication no
-		UsePAM no
-		```
+2. Open SSH config file, /etc/ssh/sshd_config, and modify the following directives
 
-	3. Save config file and restart the SSH service.
+>```
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+UsePAM no
+```
 
-		`sudo systemctl restart ssh` - On Ubuntu or Debian
+3. Save config file and restart the SSH service.
 
-		`sudo systemctl restart sshd` - On CentOS or Fedora
+>`sudo systemctl restart ssh` - On Ubuntu or Debian
 
-#SSH Client-side Config File
+>`sudo systemctl restart sshd` - On CentOS or Fedora
+
+## SSH Client-side Config File
 
 	File is written in stanzas. Three stanzas are written below
 
@@ -85,8 +89,8 @@
 	- -o option to override single option declaration
 	- -F (configfile) Specify a different configuration file
 
-#SSH Tunneling || SSH Port Forwarding
-- Local Port Forwarding
+## SSH Tunneling || SSH Port Forwarding
+### Local Port Forwarding
 	Forwards a connection from the client host to the SSH server host and then to the destination host port.
 
 	`ssh -L [LOCAL_IP]LOCAL_PORT:DESTINATION:DESTINSTION_PORT [USER@]SSH_SERVER`
@@ -110,7 +114,7 @@
 
 	! AllowTcpForwarding must be set to yes to allow Local Port Forwarding !
 
-- Remote Port Forwarding
+### Remote Port Forwarding
 	Forwards a port from the server host to the client host and then to the destination host port.
 	Remote port forwarding is mostly used to give access to an internal service to someone on the outside.
 
@@ -126,7 +130,7 @@
 	
 	! GatewayPorts must be set to yes to allow remote port forwarding.
 
-- Dynamic Port Forwarding
+### Dynamic Port Forwarding
 	
 	Creates SOCKS proxy server which allows communication across a range of ports.
 
