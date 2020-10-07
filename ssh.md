@@ -95,16 +95,16 @@ Forwards a connection from the client host to the SSH server host and then to th
 
 Remember that any port number less than 1025 is privileged and can only be used by root. If your server is listening on a port other than 22, use the `-p [PORT_NUMBER]` option.
 	
-EXAMPLE - A database on machine db001.host on an internal network, on port 3306, accessible from machine pub001.host. You want to connect using you local machine mysql client to the database server. 
+>EXAMPLE - A database on machine db001.host on an internal network, on port 3306, accessible from machine pub001.host. You want to connect using you local machine mysql client to the database server. 
+>		
+>`ssh -L 3336:db001.host:3306 user@pub001.host`
 	
-`ssh -L 3336:db001.host:3306 user@pub001.host`
-	
-EXAMPLE - Connect to remote machine through VNC (Virtual Network Computing) which runs on the same private server. 
-	
-`ssh -L 5901:127.0.0.1:5901 -N -f user@remote.host`
-	
-The -f option tells the ssh command to run in the background.
-The -N option means do not execute a remote command. We use localhost because the VNC and  SSH server are running on the same host. 
+>EXAMPLE - Connect to remote machine through VNC (Virtual Network Computing) which runs on the same private server. 
+>	
+>`ssh -L 5901:127.0.0.1:5901 -N -f user@remote.host`
+>	
+>The -f option tells the ssh command to run in the background.
+>The -N option means do not execute a remote command. We use localhost because the VNC and  SSH server are running on the same host. 
 
 ! AllowTcpForwarding must be set to yes to allow Local Port Forwarding !
 
@@ -119,9 +119,9 @@ Remote port forwarding is mostly used to give access to an internal service to s
 - `DESTINATION:DESTINATION_PORT` - THe IP or hostname and the port of the destination machine.
 - `[USER@]SERVER_IP` - The remote SSH user and server IP address.	
 
-EXAMPLE - Use accessible SSH server to listen on port 8080 and tunnel all traffic from this port to your local machine on port 3000.
-
-`ssh -R 8080:127.0.0.1:3000 -N -f user@remote.host`
+>EXAMPLE - Use accessible SSH server to listen on port 8080 and tunnel all traffic from this port to your local machine on port 3000.
+>
+>`ssh -R 8080:127.0.0.1:3000 -N -f user@remote.host`
 	
 ! GatewayPorts must be set to yes to allow remote port forwarding.
 
@@ -134,7 +134,7 @@ Creates SOCKS proxy server which allows communication across a range of ports.
 - `[LOCAL_IP:]LOCAL_PORT` - The local machine ip and port number. When LICAL)IP is omitted the ssh client binds on localhost. 
 - `[USER@]SERVER_IP` - The remote SSH user and server IP address. 
 
-EXAMPLE - Create a SOCKS tunnel on port 9090:
-
-`ssh -D 9090 -N -f user@remote.host`
+>EXAMPLE - Create a SOCKS tunnel on port 9090:
+>
+>`ssh -D 9090 -N -f user@remote.host`
 
