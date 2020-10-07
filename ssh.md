@@ -1,7 +1,7 @@
 # SSH
 ## SSH Login.
 
-`ssh user@<ip_address>`
+`ssh -p PORT_NUMBER user@<ip_address>`
 
 ## Running Remote Command
 `ssh user@<ip_address> {'|"}YOUR_REMOTE_COMMAND{'|"}`
